@@ -1,0 +1,50 @@
+{
+  "project_id": "gen-lang-client-0750044832",
+  "auth": {
+    "providers": ["google.com"]
+  },
+  "firestore": {
+    "collections": {
+      "users": {
+        "description": "Stores user profiles including those created via Google Sign-In",
+        "document_id": "uid",
+        "schema": {
+          "email": {
+            "type": "string",
+            "required": true,
+            "description": "User email address"
+          },
+          "displayName": {
+            "type": "string",
+            "required": false,
+            "description": "User full name"
+          },
+          "photoURL": {
+            "type": "string",
+            "required": false,
+            "description": "URL to user profile picture"
+          },
+          "role": {
+            "type": "string",
+            "required": false,
+            "description": "User role (e.g., 'user', 'admin', 'reseller')"
+          },
+          "createdAt": {
+            "type": "timestamp",
+            "required": true,
+            "description": "Account creation timestamp"
+          },
+          "lastLoginAt": {
+            "type": "timestamp",
+            "required": true,
+            "description": "Last login timestamp"
+          }
+        },
+        "rules": {
+          "read": "request.auth != null && request.auth.uid == resource.id",
+          "write": "request.auth != null && request.auth.uid == request.resource.id"
+        }
+      }
+    }
+  }
+}
